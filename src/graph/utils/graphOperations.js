@@ -113,12 +113,12 @@ const relaxEdge = (edge, vertices) => {
   const sum = predecessorProps.estimate + edge.element
 
   if (sum < vertexProps.estimate) {
-    vertexProps.predecessor = _origin.element
+    vertexProps.predecessor = _origin
     vertexProps.estimate = sum
   }
 }
 
-export const dijkstraShortestPaths = (graph, initialVertex) => {
+export const initDijkstra = (graph, initialVertex) => {
   const vertices = setupDijkstra(graph)
 
   vertices.get(initialVertex).estimate = 0
@@ -136,4 +136,20 @@ export const dijkstraShortestPaths = (graph, initialVertex) => {
     })
   }
   return vertices
+}
+
+export const dijkstraShortestPaths = (vertices, origin, destination) => {
+  const destinationVertex = vertices.get(destination)
+  let auxVertex = Object.assign(destinationVertex, {})
+  let path = []
+
+  while(auxVertex.predecessor !== origin) {
+    path.unshift(auxVertex.predecessor)
+    auxVertex = vertices.get(auxVertex.predecessor)
+  }
+
+  path.unshift(origin)
+  path.push(destination)
+
+  return path.join(' -> ')
 }
