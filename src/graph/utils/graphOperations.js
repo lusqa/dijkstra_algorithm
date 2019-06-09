@@ -58,3 +58,36 @@ export const toStringMap = map => {
     console.log({ key, value, index })
   })
 }
+
+// Dijkstra
+const setupDijkstra = graph => {
+  const map = new Map()
+  for (let v of graph.vertices) {
+    map.set(v, {
+      predecessor: null,
+      estimate: Number.POSITIVE_INFINITY,
+      isOpen: true
+    })
+  }
+  return map
+}
+
+export const dijkstraShortestPaths = (graph, initialVertex) => {
+  const vertices = setupDijkstra(graph)
+
+  vertices.get(initialVertex).estimate = 0
+
+  while (hasOpenVertices(vertices)) {
+    const openVertices = getOpenVertices(vertices)
+
+    const smallerEstimateVertex = getVertexSmallerEstimate(openVertices)
+    vertices.get(smallerEstimateVertex).isOpen = false
+
+    const outcoming = graph.incidentEdges(smallerEstimateVertex)
+
+    outcoming.forEach((edge, vertex) => {
+      relaxEdge(edge, vertex, vertices, smallerEstimateVertex)
+    })
+  }
+  return vertices
+}
