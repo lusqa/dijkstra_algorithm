@@ -72,6 +72,16 @@ const setupDijkstra = graph => {
   return map
 }
 
+const hasOpenVertices = vertices => {
+  let hasOpenVertices = false
+  vertices.forEach((vertexProps, vertex) => {
+    if (vertexProps.isOpen) {
+      hasOpenVertices = true
+    }
+  })
+  return hasOpenVertices
+}
+
 const getOpenVertices = vertices => {
   const openVertices = new Map()
   vertices.forEach((vertexProps, vertex) => {
@@ -85,12 +95,7 @@ const getOpenVertices = vertices => {
 export const dijkstraShortestPaths = (graph, initialVertex) => {
   const vertices = setupDijkstra(graph)
 
-  console.log({ openVertices: getOpenVertices(vertices) })
-
   vertices.get(initialVertex).estimate = 0
-  vertices.get(initialVertex).isOpen = false
-
-  console.log({ openVertices: getOpenVertices(vertices) })
 
   /* while (hasOpenVertices(vertices)) {
     const openVertices = getOpenVertices(vertices)
