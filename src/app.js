@@ -26,4 +26,4 @@ graph.addEdge(v3, v5, 4)
 
 graph.addEdge(v4, v5, 6)
 
-dijkstraShortestPaths(graph, v0)
+console.log(dijkstraShortestPaths(graph, v0))

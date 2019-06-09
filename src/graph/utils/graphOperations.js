@@ -104,12 +104,26 @@ const getSmallerEstimateVertex = vertices => {
   return smallerVertex
 }
 
+const relaxEdge = (edge, vertices) => {
+  const { _origin, _destination } = edge
+
+  const vertexProps = vertices.get(_destination)
+  const predecessorProps = vertices.get(_origin)
+
+  const sum = predecessorProps.estimate + edge.element
+
+  if (sum < vertexProps.estimate) {
+    vertexProps.predecessor = _origin.element
+    vertexProps.estimate = sum
+  }
+}
+
 export const dijkstraShortestPaths = (graph, initialVertex) => {
   const vertices = setupDijkstra(graph)
 
   vertices.get(initialVertex).estimate = 0
 
-  /* while (hasOpenVertices(vertices)) {
+  while (hasOpenVertices(vertices)) {
     const openVertices = getOpenVertices(vertices)
 
     const smallerEstimateVertex = getSmallerEstimateVertex(openVertices)
@@ -121,5 +135,5 @@ export const dijkstraShortestPaths = (graph, initialVertex) => {
       relaxEdge(edge, vertices)
     })
   }
-  return vertices */
+  return vertices
 }
