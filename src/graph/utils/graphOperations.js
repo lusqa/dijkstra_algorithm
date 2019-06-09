@@ -92,6 +92,18 @@ const getOpenVertices = vertices => {
   return openVertices
 }
 
+const getSmallerEstimateVertex = vertices => {
+  let smallerEstimate = Number.POSITIVE_INFINITY
+  let smallerVertex
+  vertices.forEach((vertexProps, vertex) => {
+    if (vertexProps.estimate < smallerEstimate) {
+      smallerVertex = vertex
+      smallerEstimate = vertexProps.estimate
+    }
+  })
+  return smallerVertex
+}
+
 export const dijkstraShortestPaths = (graph, initialVertex) => {
   const vertices = setupDijkstra(graph)
 
@@ -100,7 +112,7 @@ export const dijkstraShortestPaths = (graph, initialVertex) => {
   /* while (hasOpenVertices(vertices)) {
     const openVertices = getOpenVertices(vertices)
 
-    const smallerEstimateVertex = getVertexSmallerEstimate(openVertices)
+    const smallerEstimateVertex = getSmallerEstimateVertex(openVertices)
     vertices.get(smallerEstimateVertex).isOpen = false
 
     const outcoming = graph.incidentEdges(smallerEstimateVertex)
