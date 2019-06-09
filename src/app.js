@@ -1,4 +1,5 @@
-import Graph from './algorithm/graph/components/Graph'
+import Graph from './graph/components/Graph'
+import { dijkstraShortestPaths } from './graph/utils/graphOperations'
 
 const graph = new Graph()
 
@@ -25,3 +26,4 @@ graph.addEdge(v3, v5, 4)
 
 graph.addEdge(v4, v5, 6)
 
+dijkstraShortestPaths(graph, v0)
