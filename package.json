@@ -12,8 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
@@ -26,10 +28,7 @@
   },
   "babel": {
     "presets": [
-      "env"
+      "@babel/preset-env"
     ]
-  },
-  "dependencies": {
-    "babel-eslint": "^10.1.0"
   }
 }
