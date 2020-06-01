@@ -1,7 +1,7 @@
 import Graph from './graph/components/Graph'
 import {
   initDijkstra,
-  dijkstraShortestPaths
+  dijkstraShortestPaths,
 } from './graph/utils/graphOperations'
 
 const graph = new Graph()

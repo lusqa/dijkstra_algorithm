@@ -5,13 +5,8 @@ module.exports = {
     browser: true,
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
-  extends: [
-    'standard',
-    'plugin:prettier/recommended'
-  ],
-  plugins: [
-    'prettier'
-  ],
-};
+  extends: ['standard', 'plugin:prettier/recommended'],
+  plugins: ['prettier'],
+}

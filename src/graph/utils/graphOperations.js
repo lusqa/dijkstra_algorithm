@@ -1,6 +1,6 @@
 export const depthFirstSearch = (graph, vertex, discovered) => {
   const incidentEdges = graph.incidentEdges(vertex)
-  incidentEdges.forEach(e => {
+  incidentEdges.forEach((e) => {
     const opposite = e.opposite(vertex)
     if (!discovered.has(opposite)) {
       discovered.set(opposite, e)
@@ -9,9 +9,9 @@ export const depthFirstSearch = (graph, vertex, discovered) => {
   })
 }
 
-export const depthFirstSearchComplete = graph => {
+export const depthFirstSearchComplete = (graph) => {
   const forest = new Map()
-  for (let v of graph.vertices) {
+  for (const v of graph.vertices) {
     if (!forest.has(v)) {
       forest.set(v, null)
       depthFirstSearch(graph, v, forest)
@@ -25,7 +25,7 @@ export const breadthFirstSearch = (graph, vertex, discovered) => {
   while (queue.length > 0) {
     const currentVertex = queue.shift()
 
-    graph.incidentEdges(currentVertex).forEach(edge => {
+    graph.incidentEdges(currentVertex).forEach((edge) => {
       const opposite = edge.opposite(currentVertex)
 
       if (!discovered.has(opposite)) {
@@ -37,7 +37,7 @@ export const breadthFirstSearch = (graph, vertex, discovered) => {
 }
 
 export const constructPath = (origin, destination, discovered) => {
-  let path = []
+  const path = []
   if (discovered.has(destination)) {
     let step = destination
 
@@ -53,26 +53,26 @@ export const constructPath = (origin, destination, discovered) => {
   return path
 }
 
-export const toStringMap = map => {
+export const toStringMap = (map) => {
   map.forEach((key, value, index) => {
     console.log({ key, value, index })
   })
 }
 
 // Dijkstra
-const setupDijkstra = graph => {
+const setupDijkstra = (graph) => {
   const map = new Map()
-  for (let v of graph.vertices) {
+  for (const v of graph.vertices) {
     map.set(v, {
       predecessor: null,
       estimate: Number.POSITIVE_INFINITY,
-      isOpen: true
+      isOpen: true,
     })
   }
   return map
 }
 
-const hasOpenVertices = vertices => {
+const hasOpenVertices = (vertices) => {
   let hasOpenVertices = false
   vertices.forEach((vertexProps, vertex) => {
     if (vertexProps.isOpen) {
@@ -82,7 +82,7 @@ const hasOpenVertices = vertices => {
   return hasOpenVertices
 }
 
-const getOpenVertices = vertices => {
+const getOpenVertices = (vertices) => {
   const openVertices = new Map()
   vertices.forEach((vertexProps, vertex) => {
     if (vertexProps.isOpen) {
@@ -92,7 +92,7 @@ const getOpenVertices = vertices => {
   return openVertices
 }
 
-const getSmallerEstimateVertex = vertices => {
+const getSmallerEstimateVertex = (vertices) => {
   let smallerEstimate = Number.POSITIVE_INFINITY
   let smallerVertex
   vertices.forEach((vertexProps, vertex) => {
@@ -141,9 +141,9 @@ export const initDijkstra = (graph, initialVertex) => {
 export const dijkstraShortestPaths = (vertices, origin, destination) => {
   const destinationVertex = vertices.get(destination)
   let auxVertex = Object.assign(destinationVertex, {})
-  let path = []
+  const path = []
 
-  while(auxVertex.predecessor !== origin) {
+  while (auxVertex.predecessor !== origin) {
     path.unshift(auxVertex.predecessor)
     auxVertex = vertices.get(auxVertex.predecessor)
   }

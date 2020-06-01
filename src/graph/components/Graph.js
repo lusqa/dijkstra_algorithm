@@ -43,8 +43,8 @@ class Graph {
   }
 
   incidentEdges1(v) {
-    let list = []
-    this._outgoing.forEach(values => {
+    const list = []
+    this._outgoing.forEach((values) => {
       values.forEach((edge, vertex) => {
         if (vertex === v) {
           list.push(edge)
@@ -55,9 +55,9 @@ class Graph {
   }
 
   incidentEdges2(vertex) {
-    let list = []
-    for (let value of this._outgoing.values()) {
-      for (let [destination, edge] of value.entries()) {
+    const list = []
+    for (const value of this._outgoing.values()) {
+      for (const [destination, edge] of value.entries()) {
         if (destination === vertex) {
           list.push(edge)
         }
